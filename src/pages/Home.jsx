@@ -1,10 +1,12 @@
 import { useEffect, useState } from "react";
 import { fetchProducts } from "../services/api";
+import { useNavigate } from "react-router-dom";
+
 
 export default function Home() {
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
-
+  const navigate = useNavigate();
 
 
   useEffect(() => {
@@ -30,8 +32,10 @@ export default function Home() {
         {products.map((product) => (
           <div
             key={product._id}
-           className="bg-white p-4 rounded-xl shadow hover:shadow-lg transition"
-          >
+            onClick={() => navigate(`/product/${product._id}`)}
+            className="bg-white p-4 rounded-xl shadow hover:shadow-lg transition cursor-pointer"
+              >
+
             <img
               src={product.image}
               alt={product.name}
